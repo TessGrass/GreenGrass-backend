@@ -25,7 +25,7 @@ export class ChartController {
         .json(response)
       console.log(response)
     } else {
-      res.sendStatus(404)
+      res.sendStatus(204)
     }
     } catch (error) {
       const err = createError(500)
