@@ -87,7 +87,7 @@ export class ChartController {
       const putChart = await Chart.findByIdAndUpdate(id, body)
       await putChart.save()
       res
-        .status(204).send()
+        .send(204)
         .json(putChart)
     } catch (err) {
       let error = err
