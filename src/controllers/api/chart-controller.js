@@ -86,9 +86,9 @@ export class ChartController {
       const id = fetchedUser[0]._id
       const putChart = await Chart.findByIdAndUpdate(id, body)
       await putChart.save()
-      res
+   /*    res
         .send(204)
-        .json(putChart)
+        .json(putChart) */
     } catch (err) {
       let error = err
       if (err.name === 'ValidationError') {
