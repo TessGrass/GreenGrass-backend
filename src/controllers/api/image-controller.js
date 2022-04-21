@@ -1,6 +1,6 @@
 
 import createError from 'http-errors'
-import { User } from '../../models/Image-model.js'
+import { User } from '../../models/image-model.js'
 
 /**
  * Represents a Image Controller class.
