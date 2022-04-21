@@ -20,6 +20,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.3",
+    "firebase-admin": "^10.0.2",
     "helmet": "^5.0.2",
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^8.5.1",

@@ -1,7 +1,7 @@
 
 import createError from 'http-errors'
-/* import fetch from 'node-fetch' */
-import { User } from '../../models/image-model.js'
+import { User } from '../../models/Image-model.js'
+
 /**
  * Represents a Image Controller class.
  */
@@ -36,12 +36,9 @@ export class ImageController {
    * @param {object} res  - Express respons object.
    * @param {Function} next - Express next middleware function.
    */
-  async getSpecificImage (req, res, next) {
+  async testingTheToken (req, res, next) {
     try {
-      const image = await Image.find({ imgId: req.image.imgId })
-      res
-        .status(200)
-        .json(image)
+      console.log('härinne')
     } catch (error) {
       const err = createError(500)
       next(err)
@@ -56,7 +53,7 @@ export class ImageController {
    * @param {Function} next - Express next middleware function.
    */
   async postInfo (req, res, next) {
-    console.log('postimage')
+    console.log('-----postinfo-----')
     console.log(req.body.name)
     console.log(req.body.userId)
     console.log(req.body.description)

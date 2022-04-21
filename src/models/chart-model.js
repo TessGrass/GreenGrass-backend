@@ -8,14 +8,17 @@ const chartSchema = new Schema({
     trim: true
   },
 
+  month: {
+    type: String,
+    trim: true
+  },
+
   irrigation: {
     type: String,
-    required: true,
     trim: true
   },
   seeds: {
     type: String,
-    required: true,
     /*   immutable: true, */
     trim: true
   },
