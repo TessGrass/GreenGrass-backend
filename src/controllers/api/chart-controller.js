@@ -1,6 +1,6 @@
 import createError from 'http-errors'
 /* import fetch from 'node-fetch' */
-import { Chart } from '../../models/Chart-model.js'
+import { Chart } from '../../models/chart-model.js'
 
 /**
  * Represents a Chart controller.
