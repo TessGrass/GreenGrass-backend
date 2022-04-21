@@ -71,20 +71,33 @@ export class ChartController {
    * @param {Function} next - Express next middleware function.
    */
   async putChartData (req, res, next) {
-    console.log('----putChartData----')
-    console.log(req.body)
-    const userId = req.body.UserId
-    const body = {
-      userId: req.body.UserId,
-      month: req.body.month,
-      irrigation: req.body.irrigation,
-      seeds: req.body.seed,
-      fertilizer: req.body.fertilizer
+    try {
+      console.log('----putChartData----')
+      console.log(req.body)
+      const userId = req.body.UserId
+      const body = {
+        userId: req.body.UserId,
+        month: req.body.month,
+        irrigation: req.body.irrigation,
+        seeds: req.body.seed,
+        fertilizer: req.body.fertilizer
+      }
+      const fetchedUser = await Chart.find({ userId })
+      const id = fetchedUser[0]._id
+      const putChart = await Chart.findByIdAndUpdate(id, body)
+      await putChart.save()
+      res
+        .status(204)
+        .json(putChart)
+    } catch (err) {
+      let error = err
+      if (err.name === 'ValidationError') {
+        error = createError(400)
+      } else {
+        error = createError(500)
+      }
+      next(error)
     }
-    const fetchedUser = await Chart.find({ userId })
-    const id = fetchedUser[0]._id
-    const putChart = await Chart.findByIdAndUpdate(id, body)
-    await putChart.save()
 /* 
     try {
       const chartSchema = new Chart({
