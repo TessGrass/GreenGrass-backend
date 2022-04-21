@@ -18,11 +18,15 @@ export class ChartController {
     console.log(req.params.id)
     console.log(req.body)
     try {
+      if (req.body.length > 0) {
       const response = await Chart.find({ userId: req.params.id })
       res
         .status(200)
         .json(response)
       console.log(response)
+    } else {
+      res.sendStatus(404)
+    }
     } catch (error) {
       const err = createError(500)
       next(err)
