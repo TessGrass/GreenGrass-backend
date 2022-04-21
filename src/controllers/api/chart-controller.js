@@ -86,9 +86,9 @@ export class ChartController {
       const id = fetchedUser[0]._id
       const putChart = await Chart.findByIdAndUpdate(id, body)
       await putChart.save()
-   /*    res
-        .send(204)
-        .json(putChart) */
+      res
+        .status(204)
+        .json(putChart)
     } catch (err) {
       let error = err
       if (err.name === 'ValidationError') {
@@ -98,28 +98,5 @@ export class ChartController {
       }
       next(error)
     }
-/* 
-    try {
-      const chartSchema = new Chart({
-        userId: req.body.UserId,
-        month: req.body.month,
-        irrigation: req.body.irrigation,
-        seeds: req.body.seed,
-        fertilizer: req.body.fertilizer
-      })
-      await chartSchema.save()
-    /*    res
-        .status(201)
-        .json(infoSchema) */
-    /* } catch (err) {
-      let error = err
-      if (err.name === 'ValidationError') {
-        error = createError(400)
-      } else {
-        error = createError(500)
-      }
-      next(error) */
-   /*  }
-  } */
-}
+  }
 }
