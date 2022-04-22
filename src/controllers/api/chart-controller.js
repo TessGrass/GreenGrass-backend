@@ -18,8 +18,10 @@ export class ChartController {
     console.log(req.params.id)
     console.log(req.body)
     try {
-      if (req.body.length > 0) {
+      if (req.params.id.length > 0) {
       const response = await Chart.find({ userId: req.params.id })
+      console.log('här')
+      console.log(response)
       res
         .status(200)
         .json(response)
