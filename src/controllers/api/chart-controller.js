@@ -47,7 +47,7 @@ export class ChartController {
     try {
       const chartSchema = new Chart({
         userId: req.body.UserId,
-        month: req.body.month,
+        period: req.body.period,
         irrigation: req.body.irrigation,
         seeds: req.body.seed,
         fertilizer: req.body.fertilizer
@@ -81,7 +81,7 @@ export class ChartController {
       const userId = req.body.UserId
       const body = {
         userId: req.body.UserId,
-        month: req.body.month,
+        period: req.body.period,
         irrigation: req.body.irrigation,
         seeds: req.body.seed,
         fertilizer: req.body.fertilizer

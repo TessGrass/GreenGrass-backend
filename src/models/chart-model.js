@@ -8,7 +8,7 @@ const chartSchema = new Schema({
     trim: true
   },
 
-  month: {
+  period: {
     type: String,
     trim: true
   },
