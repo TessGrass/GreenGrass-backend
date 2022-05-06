@@ -16,7 +16,6 @@ export class AuthController {
    * @param {Function} next - Express next middleware function.
    */
   async authenticateToken (req, res, next) {
-    // console.log(req.headers)
     console.log('-----authenticateToken-----')
     try {
       if (firebase.apps.length === 0) {
@@ -28,12 +27,7 @@ export class AuthController {
       const header = req.headers?.authorization
       if (header !== 'Bearer null' && req.headers?.authorization?.startsWith('Bearer ')) {
         const idToken = req.headers.authorization.split('Bearer ')[1]
-        /* const [Bearer, token] */
-        /*     const [Bearer, token] = req.headers.authorization?.split(' ') */
-        console.log(idToken)
-        console.log()
         const decodedToken = await getAuth().verifyIdToken(idToken)
-        console.log(decodedToken)
         if (decodedToken) {
           console.log(decodedToken.email)
           next()

@@ -1,5 +1,4 @@
 import createError from 'http-errors'
-/* import fetch from 'node-fetch' */
 import { Chart } from '../../models/chart-model.js'
 
 /**
@@ -7,7 +6,7 @@ import { Chart } from '../../models/chart-model.js'
  */
 export class ChartController {
   /**
-   * Fetching image from authorized owner.
+   * Fetching data from authorized owner.
    *
    * @param {object} req - Express request object.
    * @param {object} res  - Express respons object.
@@ -34,7 +33,7 @@ export class ChartController {
   }
 
   /**
-   * Post image to Image service.
+   * Post chartdata to database.
    *
    * @param {object} req - Express request object.
    * @param {object} res  - Express respons object.
@@ -43,7 +42,6 @@ export class ChartController {
   async postChartData (req, res, next) {
     console.log('----postChartData----')
     console.log(req.body)
-
     try {
       const chartSchema = new Chart({
         userId: req.body.UserId,
@@ -68,7 +66,7 @@ export class ChartController {
   }
 
   /**
-   * Post image to Image service.
+   * Put chartData to database.
    *
    * @param {object} req - Express request object.
    * @param {object} res  - Express respons object.

@@ -29,6 +29,8 @@ export class ImageController {
     }
   }
 
+  // !! ALLT NEDAN SKA BORT !! //
+
   /**
    * Get a specific image.
    *

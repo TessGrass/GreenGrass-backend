@@ -16,3 +16,8 @@ router.put('/chart', authController.authenticateToken, chartController.putChartD
 // router.post('/images', (req, res, next) => controller.postInfo(req, res, next))
 /* router.delete('/images/:id', (req, res, next) => controller.deleteSpecificImage) */
 /* router.get('/images/:id', (req, res, next) => controller.getSpecificImage) */
+
+/* 1. Skrota image-controllern helt?
+2. try / catch måste implementeras
+3. testa/skicka statuskoder
+4. Sätt kontroll på get */
