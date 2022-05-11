@@ -12,8 +12,8 @@ export class ChartController {
    * @param {object} res  - Express respons object.
    * @param {Function} next - Express next middleware function.
    */
-  async getChartInfo (req, res, next) {
-    console.log('----getChartInfo----')
+  async getChartData (req, res, next) {
+    console.log('----getChartData----')
     console.log(req.params.id)
     console.log(req.body)
     try {
@@ -39,21 +39,40 @@ export class ChartController {
    * @param {object} res  - Express respons object.
    * @param {Function} next - Express next middleware function.
    */
-  async postChartData (req, res, next) {
+  async updateChartData (req, res, next) {
     console.log('----postChartData----')
-    console.log(req.body)
     try {
-      const chartSchema = new Chart({
-        userId: req.body.UserId,
-        period: req.body.period,
-        irrigation: req.body.irrigation,
-        seeds: req.body.seed,
-        fertilizer: req.body.fertilizer
-      })
-      await chartSchema.save()
-    /*    res
-        .status(201)
-        .json(infoSchema) */
+      const response = await Chart.find({ userId: req.body.UserId })
+      if (response.length === 0) {
+        console.log('post')
+        const chartSchema = new Chart({
+          userId: req.body.UserId,
+          period: req.body.period,
+          irrigation: req.body.irrigation,
+          seeds: req.body.seed,
+          fertilizer: req.body.fertilizer
+        })
+        await chartSchema.save()
+        res
+          .sendStatus(201)
+          /* .json(chartSchema) */
+      } else {
+        console.log('put')
+        const body = {
+          userId: req.body.UserId,
+          period: req.body.period,
+          irrigation: req.body.irrigation,
+          seeds: req.body.seed,
+          fertilizer: req.body.fertilizer
+        }
+        const fetchedUser = await Chart.find({ userId: req.body.UserId })
+        const id = fetchedUser[0]._id
+        const putChart = await Chart.findByIdAndUpdate(id, body)
+        await putChart.save()
+        res
+          .sendStatus(204)
+        /*  .json(putChart) */
+      }
     } catch (err) {
       let error = err
       if (err.name === 'ValidationError') {

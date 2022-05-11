@@ -23,7 +23,6 @@ export class AuthController {
           credential: cert(firebaseConfig)
         })
       }
-
       const header = req.headers?.authorization
       if (header !== 'Bearer null' && req.headers?.authorization?.startsWith('Bearer ')) {
         const idToken = req.headers.authorization.split('Bearer ')[1]
@@ -32,10 +31,13 @@ export class AuthController {
           console.log(decodedToken.email)
           next()
         } else {
-          res.send(403)
+          res.sendStatus(403)
         }
+      } else {
+        res.sendStatus(401)
       }
     } catch (err) {
+      console.log('in error')
       console.log(err.message)
     }
   }

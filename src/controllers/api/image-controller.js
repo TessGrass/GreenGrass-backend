@@ -29,24 +29,6 @@ export class ImageController {
     }
   }
 
-  // !! ALLT NEDAN SKA BORT !! //
-
-  /**
-   * Get a specific image.
-   *
-   * @param {object} req - Express request object.
-   * @param {object} res  - Express respons object.
-   * @param {Function} next - Express next middleware function.
-   */
-  async testingTheToken (req, res, next) {
-    try {
-      console.log('härinne')
-    } catch (error) {
-      const err = createError(500)
-      next(err)
-    }
-  }
-
   /**
    * Post image to Image service.
    *
@@ -77,6 +59,24 @@ export class ImageController {
         error = createError(500)
       }
       next(error)
+    }
+  }
+
+  // !! ALLT NEDAN SKA BORT !! //
+
+  /**
+   * Get a specific image.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res  - Express respons object.
+   * @param {Function} next - Express next middleware function.
+   */
+  async testingTheToken (req, res, next) {
+    try {
+      console.log('härinne')
+    } catch (error) {
+      const err = createError(500)
+      next(err)
     }
   }
 }
