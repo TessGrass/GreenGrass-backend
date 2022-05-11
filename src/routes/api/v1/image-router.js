@@ -9,7 +9,7 @@ const chartController = new ChartController()
 const authController = new AuthController()
 /* router.get('/images', (req, res, next) => controller.getInfo(req, res, next)) */
 /* router.get('/chart/:id', (req, res, next) => chartController.getChartData(req, res, next)) */
-router.get('/chart/:id', authController.authenticateToken, chartController.getChartData)
+router.get('/chart/:id', /* authController.authenticateToken, */ chartController.getChartData)
 router.post('/chart', authController.authenticateToken, chartController.updateChartData)
 /* router.put('/chart', authController.authenticateToken, chartController.putChartData) */
 
