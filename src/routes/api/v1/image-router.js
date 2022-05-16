@@ -12,6 +12,7 @@ const todoController = new TodoController()
 
 router.get('/chart/:id', authController.authenticateToken, chartController.getChartData)
 router.post('/chart', authController.authenticateToken, chartController.updateChartData)
+router.get('/todo/:id', todoController.getTodoData)
 router.post('/todo', todoController.postTodoData)
 /* router.put('/chart', authController.authenticateToken, chartController.putChartData) */
 
