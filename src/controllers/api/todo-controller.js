@@ -15,14 +15,12 @@ export class TodoController {
   async getTodoData (req, res, next) {
     console.log('----getTodoData----')
     console.log(req.params.id)
-    console.log(req.body)
     try {
       if (req.params.id.length > 0) {
         const response = await Todo.find({ userId: req.params.id })
         res
           .status(200)
           .json(response)
-        console.log(response)
       } else {
         res.sendStatus(204)
       }
@@ -43,28 +41,19 @@ export class TodoController {
     console.log('----postTodoData----')
     console.log(req.body)
     try {
-      const response = await Todo.find({ userId: req.body.UserId })
-      if (response.length === 0) {
-        const todoSchema = new Todo({
-          userId: req.body.UserId,
-          title: req.body.title,
-          completed: req.body.completed
-        })
-        await todoSchema.save()
-        res
-          .sendStatus(204)
-      } else {
-        res
-          .sendStatus(404)
-      }
-    } catch (err) {
-      let error = err
-      if (err.name === 'ValidationError') {
-        error = createError(400)
-      } else {
-        error = createError(500)
-      }
-      next(error)
+      const response = await Todo.find({ userId: req.body.userId })
+      console.log(response)
+      const todoSchema = new Todo({
+        userId: req.body.userId,
+        title: req.body.title,
+        completed: req.body.completed
+      })
+      await todoSchema.save()
+      res
+        .sendStatus(204)
+    } catch (error) {
+      const err = createError(500)
+      next(err)
     }
   }
 
@@ -78,31 +67,20 @@ export class TodoController {
   async deleteTodoData (req, res, next) {
     try {
       console.log('----deleteTodoData----')
-      console.log(req.body)
-      /* const userId = req.body.UserId
-      const body = {
-        userId: req.body.UserId,
-        period: req.body.period,
-        irrigation: req.body.irrigation,
-        seeds: req.body.seed,
-        fertilizer: req.body.fertilizer
+      const response = await Todo.findById(req.params.id)
+      if (response) {
+        await Todo.findByIdAndDelete(req.params.id)
+        res
+          .sendStatus(204)
       }
-      const fetchedUser = await Todo.find({ userId })
-      const id = fetchedUser[0]._id
-      const putChart = await Todo.findByIdAndUpdate(id, body)
-      await putChart.save()
-      res
-        .status(204)
-        .json(putChart) */
     } catch (err) {
       let error = err
-      if (err.name === 'ValidationError') {
-        error = createError(400)
+      if (err.name === 'CastError') {
+        error = createError(404)
       } else {
         error = createError(500)
       }
       next(error)
     }
   }
-  /*  await Image.findByIdAndDelete(image.id) */
 }

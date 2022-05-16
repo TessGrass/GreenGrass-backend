@@ -14,6 +14,7 @@ router.get('/chart/:id', authController.authenticateToken, chartController.getCh
 router.post('/chart', authController.authenticateToken, chartController.updateChartData)
 router.get('/todo/:id', todoController.getTodoData)
 router.post('/todo', todoController.postTodoData)
+router.delete('/todo/:id', todoController.deleteTodoData)
 /* router.put('/chart', authController.authenticateToken, chartController.putChartData) */
 
 // router.post('/chart', (req, res, next) => chartController.postChartInfo(req, res, next))
