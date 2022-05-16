@@ -1,14 +1,18 @@
 import express from 'express'
 import { ChartController } from '../../../controllers/api/chart-controller.js'
 import { AuthController } from '../../../controllers/api/auth-controller.js'
+import { TodoController } from '../../../controllers/api/todo-controller'
 export const router = express.Router()
 
 const chartController = new ChartController()
 const authController = new AuthController()
+const todoController = new TodoController()
 /* router.get('/images', (req, res, next) => controller.getInfo(req, res, next)) */
 /* router.get('/chart/:id', (req, res, next) => chartController.getChartData(req, res, next)) */
+
 router.get('/chart/:id', authController.authenticateToken, chartController.getChartData)
 router.post('/chart', authController.authenticateToken, chartController.updateChartData)
+router.post('/todo', todoController.postTodoData)
 /* router.put('/chart', authController.authenticateToken, chartController.putChartData) */
 
 // router.post('/chart', (req, res, next) => chartController.postChartInfo(req, res, next))

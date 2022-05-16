@@ -1,10 +1,10 @@
 import createError from 'http-errors'
-import { Chart } from '../../models/chart-model.js'
+import { Todo } from '../../models/todo-model.js'
 
 /**
- * Represents a Chart controller.
+ * Represents a Todo controller.
  */
-export class ChartController {
+export class TodoController {
   /**
    * Fetching data from authorized owner.
    *
@@ -12,13 +12,13 @@ export class ChartController {
    * @param {object} res  - Express respons object.
    * @param {Function} next - Express next middleware function.
    */
-  async getChartData (req, res, next) {
-    console.log('----getChartData----')
+  async getTodoData (req, res, next) {
+    console.log('----getTodoData----')
     console.log(req.params.id)
     console.log(req.body)
     try {
       if (req.params.id.length > 0) {
-        const response = await Chart.find({ userId: req.params.id })
+        const response = await Todo.find({ userId: req.params.id })
         res
           .status(200)
           .json(response)
@@ -33,41 +33,30 @@ export class ChartController {
   }
 
   /**
-   * Post chartdata to database.
+   * Post tododata to database.
    *
    * @param {object} req - Express request object.
    * @param {object} res  - Express respons object.
    * @param {Function} next - Express next middleware function.
    */
-  async updateChartData (req, res, next) {
-    console.log('----postChartData----')
+  async postTodoData (req, res, next) {
+    console.log('----postTodoData----')
+    console.log(req)
+    console.log(req.body)
     try {
-      const response = await Chart.find({ userId: req.body.UserId })
+      const response = await Todo.find({ userId: req.body.UserId })
       if (response.length === 0) {
-        const chartSchema = new Chart({
+        const todoSchema = new Todo({
           userId: req.body.UserId,
-          period: req.body.period,
-          irrigation: req.body.irrigation,
-          seeds: req.body.seed,
-          fertilizer: req.body.fertilizer
+          title: req.body.title,
+          completed: req.body.completed
         })
-        await chartSchema.save()
+        await todoSchema.save()
         res
           .sendStatus(201)
       } else {
-        const body = {
-          userId: req.body.UserId,
-          period: req.body.period,
-          irrigation: req.body.irrigation,
-          seeds: req.body.seed,
-          fertilizer: req.body.fertilizer
-        }
-        const fetchedUser = await Chart.find({ userId: req.body.UserId })
-        const id = fetchedUser[0]._id
-        const putChart = await Chart.findByIdAndUpdate(id, body)
-        await putChart.save()
         res
-          .sendStatus(204)
+          .sendStatus(404)
       }
     } catch (err) {
       let error = err
@@ -87,11 +76,11 @@ export class ChartController {
    * @param {object} res  - Express respons object.
    * @param {Function} next - Express next middleware function.
    */
-  async putChartData (req, res, next) {
+  async deleteTodoData (req, res, next) {
     try {
-      console.log('----putChartData----')
+      console.log('----deleteTodoData----')
       console.log(req.body)
-      const userId = req.body.UserId
+      /* const userId = req.body.UserId
       const body = {
         userId: req.body.UserId,
         period: req.body.period,
@@ -99,13 +88,13 @@ export class ChartController {
         seeds: req.body.seed,
         fertilizer: req.body.fertilizer
       }
-      const fetchedUser = await Chart.find({ userId })
+      const fetchedUser = await Todo.find({ userId })
       const id = fetchedUser[0]._id
-      const putChart = await Chart.findByIdAndUpdate(id, body)
+      const putChart = await Todo.findByIdAndUpdate(id, body)
       await putChart.save()
       res
         .status(204)
-        .json(putChart)
+        .json(putChart) */
     } catch (err) {
       let error = err
       if (err.name === 'ValidationError') {
@@ -116,4 +105,5 @@ export class ChartController {
       next(error)
     }
   }
+  /*  await Image.findByIdAndDelete(image.id) */
 }

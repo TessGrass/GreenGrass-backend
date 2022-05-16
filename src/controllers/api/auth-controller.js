@@ -37,8 +37,8 @@ export class AuthController {
         res.sendStatus(401)
       }
     } catch (err) {
-      console.log('in error')
       console.log(err.message)
+      next(err)
     }
   }
 }
