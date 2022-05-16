@@ -1,5 +1,5 @@
 import createError from 'http-errors'
-import { Todo } from '../../models/todo-model.js'
+import { Todo } from '../../models/todos-model.js'
 
 /**
  * Represents a Todo controller.
