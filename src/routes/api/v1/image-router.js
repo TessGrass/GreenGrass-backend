@@ -1,7 +1,7 @@
 import express from 'express'
 import { ChartController } from '../../../controllers/api/chart-controller.js'
 import { AuthController } from '../../../controllers/api/auth-controller.js'
-import { TodoController } from '../../../controllers/api/todo-controller'
+import { TodoController } from '../../../controllers/api/todo-controller.js'
 export const router = express.Router()
 
 const chartController = new ChartController()
