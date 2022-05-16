@@ -53,7 +53,7 @@ export class TodoController {
         })
         await todoSchema.save()
         res
-          .sendStatus(201)
+          .sendStatus(204)
       } else {
         res
           .sendStatus(404)
