@@ -41,8 +41,8 @@ export class TodoController {
     console.log('----postTodoData----')
     console.log(req.body)
     try {
-      const response = await Todo.find({ userId: req.body.userId })
-      console.log(response)
+      /* const response = await Todo.find({ userId: req.body.userId })
+      console.log(response) */
       const todoSchema = new Todo({
         userId: req.body.userId,
         title: req.body.title,
