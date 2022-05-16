@@ -1,10 +1,8 @@
 import express from 'express'
-/* import { ImageController } from '../../../controllers/api/image-controller.js' */
 import { ChartController } from '../../../controllers/api/chart-controller.js'
 import { AuthController } from '../../../controllers/api/auth-controller.js'
 export const router = express.Router()
 
-/* const controller = new ImageController() */
 const chartController = new ChartController()
 const authController = new AuthController()
 /* router.get('/images', (req, res, next) => controller.getInfo(req, res, next)) */
