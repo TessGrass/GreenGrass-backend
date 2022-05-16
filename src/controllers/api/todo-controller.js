@@ -16,22 +16,25 @@ export class TodoController {
     console.log('----getTodoData----')
     console.log(req.params.id)
     try {
-      if (req.params.id.length > 0) {
-        const response = await Todo.find({ userId: req.params.id })
+      const response = await Todo.find({ userId: req.params.id })
+      if (response[0]._id) {
         res
           .status(200)
           .json(response)
-      } else {
-        res.sendStatus(204)
       }
-    } catch (error) {
-      const err = createError(500)
-      next(err)
+    } catch (err) {
+      let error = err
+      if (err.name === 'TypeError') {
+        error = createError(404)
+      } else {
+        error = createError(500)
+      }
+      next(error)
     }
   }
 
   /**
-   * Post tododata to database.
+   * Post Tododata to database.
    *
    * @param {object} req - Express request object.
    * @param {object} res  - Express respons object.
@@ -58,7 +61,7 @@ export class TodoController {
   }
 
   /**
-   * Put chartData to database.
+   * Delete TodoData to database.
    *
    * @param {object} req - Express request object.
    * @param {object} res  - Express respons object.

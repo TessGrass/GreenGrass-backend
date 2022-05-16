@@ -2,7 +2,6 @@ import { initializeApp, cert } from 'firebase-admin/app'
 import { getAuth } from 'firebase-admin/auth'
 import firebase from 'firebase-admin'
 import firebaseConfig from '../../config/firebase-config.js'
-// const json = JSON.parse(await readFile(new URL('../../../server.json', import.meta.url)))
 
 /**
  * Represents a authenticeToken class.
@@ -28,7 +27,6 @@ export class AuthController {
         const idToken = req.headers.authorization.split('Bearer ')[1]
         const decodedToken = await getAuth().verifyIdToken(idToken)
         if (decodedToken) {
-          console.log(decodedToken.email)
           next()
         } else {
           res.sendStatus(403)
