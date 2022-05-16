@@ -41,4 +41,4 @@ todoSchema.virtual('id').get(function () {
   return this._id.toHexString()
 })
 
-export const Todo = mongoose.model('Chart', todoSchema)
+export const Todo = mongoose.model('Todo', todoSchema)
