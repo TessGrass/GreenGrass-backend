@@ -61,7 +61,38 @@ export class TodoController {
   }
 
   /**
-   * Delete TodoData to database.
+   * Patch Tododata to database.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res  - Express respons object.
+   * @param {Function} next - Express next middleware function.
+   */
+  async patchTodoData (req, res, next) {
+    console.log('----patchTodoData----')
+    console.log(req.body, req.params.id)
+    const isEmpty = Object.keys(req.body).length === 0
+    try {
+      if (isEmpty) {
+        const err = createError(400)
+        next(err)
+      } else {
+        const patchTodo = await Todo.findByIdAndUpdate(req.params.id, req.body)
+        await patchTodo.save()
+        res.sendStatus(204)
+      }
+    } catch (err) {
+      let error = err
+      if (err.name === 'ValidationError') {
+        error = createError(400)
+      } else {
+        error = createError(500)
+      }
+      next(error)
+    }
+  }
+
+  /**
+   * Delete TodoData in database.
    *
    * @param {object} req - Express request object.
    * @param {object} res  - Express respons object.

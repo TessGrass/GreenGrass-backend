@@ -21,7 +21,7 @@ try {
   app.use('/', router)
   app.use(function (err, req, res, next) {
     if (err.status === 400) {
-      res.status(400).json({ status_code: 400, message: 'The request cannot or will not be processed due to something that is perceived to be a client error (for example, validation error.' })
+      res.status(400).json({ status_code: 400, message: 'The request cannot or will not be processed due to something that is perceived to be a client error (for example, validation error).' })
     } else if (err.status === 401) {
       res.status(401).json({ status_code: 401, message: 'Access token invalid or not provided.' })
     } else if (err.status === 403) {
