@@ -9,7 +9,7 @@ const authController = new AuthController()
 const todoController = new TodoController()
 
 router.get('/chart/:id', authController.authenticateToken, chartController.getChartData)
-router.get('/todo/:id', todoController.getTodoData)
+router.get('/todo/:id', authController.authenticateToken, todoController.getTodoData)
 router.post('/chart', authController.authenticateToken, chartController.updateChartData)
 router.post('/todo', authController.authenticateToken, todoController.postTodoData)
 router.patch('/todo/:id', authController.authenticateToken, todoController.patchTodoData)
