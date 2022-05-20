@@ -31,10 +31,6 @@ export class AuthController {
           req.user = decodedToken.sub
           next()
         }
-      } else {
-        console.log('401 in else')
-        const err = createError(401)
-        next(err)
       }
     } catch (err) {
       let error = err
@@ -44,7 +40,6 @@ export class AuthController {
       } else {
         error = createError(500)
       }
-      console.log('rad 47 ovanför next(error)')
       next(error)
     }
   }
@@ -65,6 +60,7 @@ export class AuthController {
       if (req.body.UserId === req.user || req.params.id === req.user) {
         next()
       } else {
+        console.log('403..')
         const err = createError(403)
         next(err)
       }
