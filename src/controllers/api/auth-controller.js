@@ -32,16 +32,19 @@ export class AuthController {
           next()
         }
       } else {
+        console.log('401 in else')
         const err = createError(401)
         next(err)
       }
     } catch (err) {
       let error = err
       if (error.code === 'auth/id-token-expired' || error.code === 'auth/argument-error') {
+        console.log('401 in error')
         error = createError(401)
       } else {
         error = createError(500)
       }
+      console.log('rad 47 ovanför next(error)')
       next(error)
     }
   }
