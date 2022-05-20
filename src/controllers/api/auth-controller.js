@@ -28,7 +28,7 @@ export class AuthController {
         const idToken = req.headers.authorization.split('Bearer ')[1]
         const decodedToken = await getAuth().verifyIdToken(idToken)
         if (decodedToken) {
-          res.locals.user = decodedToken.sub
+          req.user = decodedToken.sub
           next()
         }
       } else {
@@ -57,9 +57,9 @@ export class AuthController {
     console.log('----authorizeUser----')
     try {
       console.log(req.body.UserId)
-      console.log(res.locals.user)
+      console.log(req.user)
       console.log(req.params.id)
-      if (req.body.UserId === res.locals.user || req.params.id === res.locals.user) {
+      if (req.body.UserId === req.user || req.params.id === req.user) {
         next()
       } else {
         const err = createError(403)
