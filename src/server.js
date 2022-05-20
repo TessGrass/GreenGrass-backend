@@ -20,6 +20,7 @@ try {
 
   app.use('/', router)
   app.use(function (err, req, res, next) {
+    console.log('server')
     if (err.status === 400) {
       err.message = 'The request cannot or will not be processed due to something that is perceived to be a client error (for example, validation error).'
     } else if (err.status === 401) {

@@ -41,12 +41,16 @@ export class TodoController {
    * @param {Function} next - Express next middleware function.
    */
   async postTodoData (req, res, next) {
-    console.log('----postTodoData----')
+    console.log('------postTodoData------')
+    console.log(req.body.UserId)
+    console.log(req.body.title)
+    console.log(req.body.completed)
     try {
-      if (!req.body.Userid || !req.body.title || !req.body.completed) {
+      if (!req.body.UserId || !req.body.title || req.body.completed === undefined) {
+        console.log('här')
         const err = createError(400)
         next(err)
-      }
+      } else {
       const todoSchema = new Todo({
         userId: req.body.UserId,
         title: req.body.title,
@@ -55,7 +59,9 @@ export class TodoController {
       await todoSchema.save()
       res
         .sendStatus(201)
+    }
     } catch (error) {
+      console.log('error')
       console.log(error)
       const err = createError(500)
       next(err)
