@@ -41,7 +41,7 @@ export class AuthController {
       } else {
         error = createError(500)
       }
-      /* next(error) */
+      next(error)
     }
   }
 
