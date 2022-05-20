@@ -36,7 +36,7 @@ export class AuthController {
     } catch (err) {
       let error = err
       if (error.code === 'auth/id-token-expired' || error.code === 'auth/argument-error') {
-        console.log('401 in error')
+        console.log('401 in catch-error')
         error = createError(401)
       } else {
         error = createError(500)
