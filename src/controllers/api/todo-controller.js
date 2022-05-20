@@ -42,19 +42,21 @@ export class TodoController {
    */
   async postTodoData (req, res, next) {
     console.log('----postTodoData----')
-    console.log(req.body)
     try {
-      /* const response = await Todo.find({ userId: req.body.userId })
-      console.log(response) */
+      if (!req.body.Userid || !req.body.title || !req.body.completed) {
+        const err = createError(400)
+        next(err)
+      }
       const todoSchema = new Todo({
-        userId: req.body.userId,
+        userId: req.body.UserId,
         title: req.body.title,
         completed: req.body.completed
       })
       await todoSchema.save()
       res
-        .sendStatus(204)
+        .sendStatus(201)
     } catch (error) {
+      console.log(error)
       const err = createError(500)
       next(err)
     }
@@ -77,8 +79,14 @@ export class TodoController {
         next(err)
       } else {
         const patchTodo = await Todo.findByIdAndUpdate(req.params.id, req.body)
-        await patchTodo.save()
-        res.sendStatus(204)
+        console.log(patchTodo)
+        if (patchTodo !== null) {
+          await patchTodo.save()
+          res.sendStatus(204)
+        } else {
+          const err = createError(404)
+          next(err)
+        }
       }
     } catch (err) {
       let error = err
@@ -102,10 +110,13 @@ export class TodoController {
     try {
       console.log('----deleteTodoData----')
       const response = await Todo.findById(req.params.id)
-      if (response) {
+      if (response !== null) {
         await Todo.findByIdAndDelete(req.params.id)
         res
           .sendStatus(204)
+      } else {
+        const err = createError(404)
+        next(err)
       }
     } catch (err) {
       let error = err
