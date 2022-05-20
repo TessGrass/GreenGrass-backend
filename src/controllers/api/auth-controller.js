@@ -30,6 +30,7 @@ export class AuthController {
         console.log(decodedToken)
         if (decodedToken) {
           req.user = decodedToken.sub
+          next()
         }
       }
     } catch (err) {
@@ -40,9 +41,8 @@ export class AuthController {
       } else {
         error = createError(500)
       }
-      next(error)
+      /* next(error) */
     }
-    next()
   }
 
   /**
