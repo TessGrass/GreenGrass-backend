@@ -27,9 +27,9 @@ export class AuthController {
       if (header !== 'Bearer null' && req.headers?.authorization?.startsWith('Bearer ')) {
         const idToken = req.headers.authorization.split('Bearer ')[1]
         const decodedToken = await getAuth().verifyIdToken(idToken)
+        console.log(decodedToken)
         if (decodedToken) {
           req.user = decodedToken.sub
-          next()
         }
       }
     } catch (err) {
@@ -42,6 +42,7 @@ export class AuthController {
       }
       next(error)
     }
+    next()
   }
 
   /**
@@ -65,6 +66,8 @@ export class AuthController {
         next(err)
       }
     } catch (err) {
+      console.log('catch 403')
+      console.log(err)
       next(err)
     }
   }
