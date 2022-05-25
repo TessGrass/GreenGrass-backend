@@ -51,15 +51,15 @@ export class TodoController {
         const err = createError(400)
         next(err)
       } else {
-      const todoSchema = new Todo({
-        userId: req.body.UserId,
-        title: req.body.title,
-        completed: req.body.completed
-      })
-      await todoSchema.save()
-      res
-        .sendStatus(201)
-    }
+        const todoSchema = new Todo({
+          userId: req.body.UserId,
+          title: req.body.title,
+          completed: req.body.completed
+        })
+        await todoSchema.save()
+        res
+          .sendStatus(201)
+      }
     } catch (error) {
       console.log('error')
       console.log(error)
