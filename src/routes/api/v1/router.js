@@ -1,6 +1,6 @@
 import express from 'express'
-import { router as imageRouter } from './image-router.js'
+import { router as resourceRouter } from './resource-router.js'
 
 export const router = express.Router()
 
-router.use('/', imageRouter)
+router.use('/', resourceRouter)
