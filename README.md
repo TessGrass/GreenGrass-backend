@@ -2,6 +2,12 @@
 
 GreenGrass as a whole is a web application for the everyday lawn nerd and GreenGrass - backend takes care of the authentication / authorization of a user and the communication with the MonogDB database.
 
+## Live
+- https://greengrass-client.herokuapp.com/
+
+## Status 
+- Active
+
 ## Built With
 - MongoDB
 - Express

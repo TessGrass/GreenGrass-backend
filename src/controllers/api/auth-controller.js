@@ -27,7 +27,6 @@ export class AuthController {
       if (header !== 'Bearer null' && req.headers?.authorization?.startsWith('Bearer ')) {
         const idToken = req.headers.authorization.split('Bearer ')[1]
         const decodedToken = await getAuth().verifyIdToken(idToken)
-        console.log(decodedToken)
         if (decodedToken) {
           req.user = decodedToken.sub
           next()
@@ -35,8 +34,6 @@ export class AuthController {
       }
     } catch (err) {
       let error = err
-      console.log(err)
-      console.log(error.code)
       if (error.code === 'auth/id-token-expired' || error.code === 'auth/argument-error') {
         error = createError(401)
       } else {
@@ -56,19 +53,13 @@ export class AuthController {
   async authorizeUser (req, res, next) {
     console.log('----authorizeUser----')
     try {
-      console.log(req.body.UserId)
-      console.log(req.user)
-      console.log(req.params.id)
       if (req.body.UserId === req.user || req.params.id === req.user) {
         next()
       } else {
-        console.log('403..')
         const err = createError(403)
         next(err)
       }
     } catch (err) {
-      console.log('catch 403')
-      console.log(err)
       next(err)
     }
   }

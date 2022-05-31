@@ -14,12 +14,9 @@ export class ChartController {
    */
   async getChartData (req, res, next) {
     console.log('----getChartData----')
-    console.log(req.params.id)
-    console.log(req.body)
     try {
       if (req.params.id.length > 0) {
         const response = await Chart.find({ userId: req.params.id })
-        console.log(response)
         if (response.length > 0) {
           res
             .status(200)
@@ -93,7 +90,6 @@ export class ChartController {
   async putChartData (req, res, next) {
     try {
       console.log('----putChartData----')
-      console.log(req.body)
       const userId = req.body.UserId
       const body = {
         userId: req.body.UserId,

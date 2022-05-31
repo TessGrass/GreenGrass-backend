@@ -14,7 +14,6 @@ export class TodoController {
    */
   async getTodoData (req, res, next) {
     console.log('----getTodoData----')
-    console.log(req.params.id)
     try {
       const response = await Todo.find({ userId: req.params.id })
       if (response[0]._id) {
@@ -42,12 +41,8 @@ export class TodoController {
    */
   async postTodoData (req, res, next) {
     console.log('------postTodoData------')
-    console.log(req.body.UserId)
-    console.log(req.body.title)
-    console.log(req.body.completed)
     try {
       if (!req.body.UserId || !req.body.title || req.body.completed === undefined) {
-        console.log('här')
         const err = createError(400)
         next(err)
       } else {
@@ -61,8 +56,6 @@ export class TodoController {
           .sendStatus(201)
       }
     } catch (error) {
-      console.log('error')
-      console.log(error)
       const err = createError(500)
       next(err)
     }
@@ -77,7 +70,6 @@ export class TodoController {
    */
   async patchTodoData (req, res, next) {
     console.log('----patchTodoData----')
-    console.log(req.body, req.params.id)
     const isEmpty = Object.keys(req.body).length === 0
     try {
       if (isEmpty) {
@@ -85,7 +77,6 @@ export class TodoController {
         next(err)
       } else {
         const patchTodo = await Todo.findByIdAndUpdate(req.params.id, req.body)
-        console.log(patchTodo)
         if (patchTodo !== null) {
           await patchTodo.save()
           res.sendStatus(204)
