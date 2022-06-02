@@ -13,7 +13,6 @@ export class TodoController {
    * @param {Function} next - Express next middleware function.
    */
   async getTodoData (req, res, next) {
-    console.log('----getTodoData----')
     try {
       const response = await Todo.find({ userId: req.params.id })
       if (response[0]._id) {
@@ -40,7 +39,6 @@ export class TodoController {
    * @param {Function} next - Express next middleware function.
    */
   async postTodoData (req, res, next) {
-    console.log('------postTodoData------')
     try {
       if (!req.body.UserId || !req.body.title || req.body.completed === undefined) {
         const err = createError(400)
@@ -69,7 +67,6 @@ export class TodoController {
    * @param {Function} next - Express next middleware function.
    */
   async patchTodoData (req, res, next) {
-    console.log('----patchTodoData----')
     const isEmpty = Object.keys(req.body).length === 0
     try {
       if (isEmpty) {
@@ -105,7 +102,6 @@ export class TodoController {
    */
   async deleteTodoData (req, res, next) {
     try {
-      console.log('----deleteTodoData----')
       const response = await Todo.findById(req.params.id)
       if (response !== null) {
         await Todo.findByIdAndDelete(req.params.id)

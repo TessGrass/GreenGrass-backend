@@ -16,7 +16,6 @@ export class AuthController {
    * @param {Function} next - Express next middleware function.
    */
   async authenticateToken (req, res, next) {
-    console.log('-----authenticateToken-----')
     try {
       if (firebase.apps.length === 0) {
         initializeApp({
@@ -51,7 +50,6 @@ export class AuthController {
    * @param {Function} next - Express next middleware function.
    */
   async authorizeUser (req, res, next) {
-    console.log('----authorizeUser----')
     try {
       if (req.body.UserId === req.user || req.params.id === req.user) {
         next()

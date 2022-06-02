@@ -13,7 +13,6 @@ export class ChartController {
    * @param {Function} next - Express next middleware function.
    */
   async getChartData (req, res, next) {
-    console.log('----getChartData----')
     try {
       if (req.params.id.length > 0) {
         const response = await Chart.find({ userId: req.params.id })
@@ -40,7 +39,6 @@ export class ChartController {
    * @param {Function} next - Express next middleware function.
    */
   async updateChartData (req, res, next) {
-    console.log('----postChartData----')
     try {
       const response = await Chart.find({ userId: req.body.UserId })
       if (response.length === 0) {
@@ -89,7 +87,6 @@ export class ChartController {
    */
   async putChartData (req, res, next) {
     try {
-      console.log('----putChartData----')
       const userId = req.body.UserId
       const body = {
         userId: req.body.UserId,
